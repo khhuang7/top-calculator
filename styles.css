@@ -62,3 +62,12 @@ button {
   display: flex;
   flex-direction: column;
 }
+
+.operations button, #clear {
+  background-color: lightgrey;
+  color: rgb(0, 68, 0);
+}
+
+#equals {
+  background-color: darkslategrey
+}
