@@ -154,3 +154,27 @@ function clear() {
 
 const clearBtn = document.querySelector("#clear");
 clearBtn.addEventListener('click', clear);
+
+// Delete and undo last operation with backspace
+function backspace() {
+  if (b !== '') {
+    b = b.slice(0, -1);
+  } else if (operator !== '') {
+    operator = '';
+  } else if (a !== '') {
+    a = a.slice(0, -1);
+  } else { 
+    console.log(`a: ${a} operator: ${operator} b: ${b}`);
+    return; 
+  }
+
+  if (display.textContent.slice(-1) === '.') decimalBtn.disabled = false;
+
+  let newText = display.textContent.slice(0, -1);
+  display.textContent = (newText.length === 0) ? 0 : newText;
+
+  console.log(`a: ${a} operator: ${operator} b: ${b}`)
+}
+
+const backspaceBtn = document.querySelector("#backspace");
+backspaceBtn.addEventListener('click', backspace);

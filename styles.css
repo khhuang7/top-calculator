@@ -30,7 +30,7 @@ button {
 
 #display {
   margin: 5px 3px;
-  min-width: 200px;
+  min-width: 272px;
   max-width: 400px;
   border: 1px solid darkgrey;
   border-radius: 5px;
@@ -45,6 +45,7 @@ button {
 
 .main-buttons {
   display: flex;
+  min-width: 300px;
 }
 
 .digits {
@@ -65,9 +66,18 @@ button {
   flex-direction: column;
 }
 
-.operations button, #clear {
+.operations button, #clear, #backspace {
   background-color: lightgrey;
   color: rgb(0, 68, 0);
+}
+
+.deletions {
+  display: flex;
+  min-width: 300px;
+}
+
+#clear, #backspace {
+  flex: 1;
 }
 
 #equals {
