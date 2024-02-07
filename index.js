@@ -55,6 +55,12 @@ function displayNumber() {
   if (a === '') {
     display.textContent = num;
     a += num;
+  } else if (b === '0') {
+    display.textContent = display.textContent.slice(0, -1) + num;
+    b = num;
+  } else if (a === '0') {
+    display.textContent = num;
+    a = num;
   } else {
     display.textContent += num;
     if (operator === '') {
