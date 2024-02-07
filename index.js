@@ -12,6 +12,11 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+  if (b === 0) {
+    alert ("Only Chuck Norris can divide by zero!");
+    return 0;
+  }
+
   return a / b;
 }
 
@@ -41,7 +46,7 @@ function operate(a, operator, b) {
 // console.log(operate(5, '*', 7));
 // console.log(operate(73, '/', 12));
 
-// Update display and saved values when pressed
+// Update display and saved values when numbers are pressed
 const display = document.querySelector("#display");
 display.textContent = '0';
 
@@ -64,6 +69,29 @@ function displayNumber() {
 const numBtns = document.querySelectorAll(".digit");
 numBtns.forEach((button) => button.addEventListener('click', displayNumber));
 
+// Update display and saved values when decimal is pressed
+const decimalBtn = document.querySelector("#decimal");
+decimalBtn.addEventListener('click', displayDecimal);
+
+function displayDecimal() {
+  if (a === '') {
+    display.textContent = '0.';
+    a += '.';
+  } else {
+    if (operator === '') {
+      a += '.';
+      display.textContent += '.';
+    } else {
+      display.textContent = (b === '') 
+      ? display.textContent + '0.' 
+      : display.textContent + '.';
+      b += '.';
+    }
+  }
+  decimalBtn.disabled = true;
+  console.log(`a: ${a} operator: ${operator} b: ${b}`)
+}
+
 // Update and display saved values when operator is pressed. If an operation was pending calculation, do the calculation first.
 function displayOperator() {
   if (!isNaN(display.textContent)) a = display.textContent;
@@ -76,6 +104,7 @@ function displayOperator() {
 
   const op = this.textContent;
   display.textContent += op;
+  decimalBtn.disabled = false;
 
   switch (op) {
     case '÷':
@@ -101,13 +130,16 @@ opBtns.forEach((button => button.addEventListener('click', displayOperator)));
 // Evaluate expression when 'equals' button is pressed
 function calculate() {
   display.textContent = Math.round(operate(a, operator, b) * Math.pow(10, 5)) / Math.pow(10, 5);
+  decimalBtn.disabled = false;
   a = '';
   operator = '';
   b = '';
 }
 
 const equalsBtn = document.querySelector("#equals");
-equalsBtn.addEventListener('click', calculate);
+equalsBtn.addEventListener('click', () => {
+  if ((a !== '') && (operator !== '') && (b !== '')) calculate();
+});
 
 // Clear the screen when 'clear' button is pressed
 function clear() {
@@ -115,7 +147,8 @@ function clear() {
   a = '';
   operator = '';
   b = ''; 
-  
+  decimalBtn.disabled = false;
+
   console.log(`a: ${a} operator: ${operator} b: ${b}`)
 }
 
