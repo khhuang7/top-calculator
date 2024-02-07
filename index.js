@@ -100,7 +100,7 @@ opBtns.forEach((button => button.addEventListener('click', displayOperator)));
 
 // Evaluate expression when 'equals' button is pressed
 function calculate() {
-  display.textContent = operate(a, operator, b);
+  display.textContent = operate(a, operator, b).toFixed(9);
   a = '';
   operator = '';
   b = '';
