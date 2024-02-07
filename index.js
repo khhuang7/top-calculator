@@ -47,7 +47,7 @@ display.textContent = '0';
 
 function displayNumber() {
   const num = this.textContent;
-  if (display.textContent === "0") {
+  if (a === '') {
     display.textContent = num;
     a += num;
   } else {
@@ -100,7 +100,7 @@ opBtns.forEach((button => button.addEventListener('click', displayOperator)));
 
 // Evaluate expression when 'equals' button is pressed
 function calculate() {
-  display.textContent = operate(a, operator, b).toFixed(9);
+  display.textContent = Math.round(operate(a, operator, b) * Math.pow(10, 5)) / Math.pow(10, 5);
   a = '';
   operator = '';
   b = '';
