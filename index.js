@@ -61,10 +61,10 @@ function displayNumber() {
   console.log(`a: ${a} operator: ${operator} b: ${b}`)
 }
 
-const digits = document.querySelectorAll(".digit");
-digits.forEach((button) => button.addEventListener('click', displayNumber));
+const numBtns = document.querySelectorAll(".digit");
+numBtns.forEach((button) => button.addEventListener('click', displayNumber));
 
-// Update and display saved values when operator is pressed
+// Update and display saved values when operator is pressed. If an operation was pending calculation, do the calculation first.
 function displayOperator() {
   if (!isNaN(display.textContent)) a = display.textContent;
   console.log(`a: ${a}`);
@@ -73,7 +73,7 @@ function displayOperator() {
     calculate();
     a = display.textContent;
   }
-  
+
   const op = this.textContent;
   display.textContent += op;
 
@@ -95,8 +95,8 @@ function displayOperator() {
   console.log(`a: ${a} operator: ${operator} b: ${b}`)
 }
 
-const operators = document.querySelector(".operations").querySelectorAll("button");
-operators.forEach((button => button.addEventListener('click', displayOperator)));
+const opBtns = document.querySelector(".operations").querySelectorAll("button");
+opBtns.forEach((button => button.addEventListener('click', displayOperator)));
 
 // Evaluate expression when 'equals' button is pressed
 function calculate() {
@@ -106,5 +106,18 @@ function calculate() {
   b = '';
 }
 
-const equals = document.querySelector("#equals");
-equals.addEventListener('click', calculate);
+const equalsBtn = document.querySelector("#equals");
+equalsBtn.addEventListener('click', calculate);
+
+// Clear the screen when 'clear' button is pressed
+function clear() {
+  display.textContent = 0;
+  a = '';
+  operator = '';
+  b = ''; 
+  
+  console.log(`a: ${a} operator: ${operator} b: ${b}`)
+}
+
+const clearBtn = document.querySelector("#clear");
+clearBtn.addEventListener('click', clear);
