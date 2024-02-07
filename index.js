@@ -184,3 +184,35 @@ function backspace() {
 
 const backspaceBtn = document.querySelector("#backspace");
 backspaceBtn.addEventListener('click', backspace);
+
+// Add keyboard support by mapping each button to an ID, then trigging a click
+numBtns.forEach((button) => button.id = "button" + button.textContent);
+const addBtn = document.querySelector("#add");
+const subtractBtn = document.querySelector("#subtract");
+const multiplyBtn = document.querySelector("#multiply");
+const divideBtn = document.querySelector("#divide");
+
+document.addEventListener('keydown', (event) => {
+  let code = event.code;
+  console.log(code);
+  if (code.includes('Digit')) {
+    const pressedBtn = document.querySelector(`#button${code.slice(-1)}`);
+    pressedBtn.click();
+  } 
+  switch (code) {
+    case 'Period':
+      decimalBtn.click();
+      break;
+    case 'Backspace':
+      backspaceBtn.click();
+      break;
+    case 'Minus':
+      subtractBtn.click();
+      break;
+    case 'Equal': case 'Enter':
+      equalsBtn.click();
+      break;
+    case 'Slash':
+      divideBtn.click();
+  }
+})
