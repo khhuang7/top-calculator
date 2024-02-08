@@ -58,7 +58,7 @@ function displayNumber() {
   } else if (b === '0') {
     display.textContent = display.textContent.slice(0, -1) + num;
     b = num;
-  } else if (a === '0') {
+  } else if (a === '0' && operator === '') {
     display.textContent = num;
     a = num;
   } else {
@@ -196,8 +196,12 @@ document.addEventListener('keydown', (event) => {
   let code = event.code;
   console.log(code);
   if (code.includes('Digit')) {
+    if (code === 'Digit8' && event.shiftKey) {
+      multiplyBtn.click();
+    } else {
     const pressedBtn = document.querySelector(`#button${code.slice(-1)}`);
     pressedBtn.click();
+    }
   } 
   switch (code) {
     case 'Period':
@@ -209,10 +213,16 @@ document.addEventListener('keydown', (event) => {
     case 'Minus':
       subtractBtn.click();
       break;
-    case 'Equal': case 'Enter':
-      equalsBtn.click();
-      break;
     case 'Slash':
       divideBtn.click();
+      break;
+    case 'Equal':
+      if (event.shiftKey) {
+        addBtn.click();
+        break;
+      }
+    case 'Enter':
+      equalsBtn.click();
+      break;
   }
 })
